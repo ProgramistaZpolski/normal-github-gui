@@ -1,6 +1,31 @@
+let leaveCommits = false; // Set to true if the top blue bar wth latest commit doesn't display correctly.
+
 function normalgithub_run() {
+    console.log("Thanks for using normal-github extension ♥")
     if(document.getElementById("normalgithub-stats") !== null) {
         document.body.removeChild(document.getElementById("normalgithub-stats"))
+    }
+    if(document.getElementsByClassName("css-truncate css-truncate-overflow text-gray").length !== 0) {
+        function tryChange() {
+            document.getElementsByClassName("list-style-none d-flex")
+            let a = document.getElementsByClassName("css-truncate css-truncate-overflow text-gray")[0].getElementsByTagName("a")[0]
+            let author = a.outerHTML;
+            a.innerHTML = a.innerHTML.replace(a.innerHTML, "").replace("committed", "")
+            document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML = author + document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML
+            for(let el of document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].getElementsByTagName("a")) {
+                el.style.position = "relative"
+                el.style.top = "-25px"
+                el.style.backgroundColor = "#f1f8fe"
+            }
+        }
+        setTimeout(function() {
+            try {
+                if(leaveCommits == false) { 
+                    tryChange();
+                }
+            }
+            catch(error) {console.error(error)}
+        }, 500)
     }
     let set1024px = ["container-xl", "js-check-all-container", "flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0", "footer"]
     set1024px.forEach(function(el) {
@@ -30,7 +55,7 @@ function normalgithub_run() {
         hi.style.borderRadius = "2px"
     }
     let css = document.createElement("style")
-    css.innerHTML = `.UnderlineNav-item.selected, .UnderlineNav-item[aria-current]:not([aria-current=false]) {background-color: white !important;border-color: transparent !important;border-top: 3px #e16227 solid !important;}.avatar-user{border-radius: 5px !important;}nav[aria-label="User profile"]{margin-left: 170px !important;}rect{border-radius: 0px !important}.new-user-avatar-cta{margin-top: 10px;border-radius: 2px;}.social-count{border-radius: 2px;}.octicon-kebab-horizontal{/*kebab mmmm*/display: none;}.octicon-download{display: none;}.octicon-pencil{fill: black;}.news{width: calc(100% - 400px);}a[href="/new"] {color: black !important;}a[href="/new"] svg {fill: black !important;}.dropdown-menu{border-radius: 2px !important;}.repository-content {width: 990px;margin-top: 90px;position: absolute;top: initial;left: 50%;transform: translateX(-50%);margin-bottom: 150px}.flash-full{display: none;}`
+    css.innerHTML = `.UnderlineNav-item.selected, .UnderlineNav-item[aria-current]:not([aria-current=false]) {background-color: white !important;border-color: transparent !important;border: 1px #e1e4e8 solid !important;border-top: 3px #e16227 solid !important;border-bottom-color: transparent !important;}.avatar-user{border-radius: 2.5px !important;}nav[aria-label="User profile"]{margin-left: 170px !important;}rect{border-radius: 0px !important}.new-user-avatar-cta{margin-top: 10px;border-radius: 2px;}.social-count{border-radius: 2px;}.octicon-kebab-horizontal{/*kebab mmmm*/display: none;}.octicon-download{display: none;}.octicon-pencil{fill: black;}.news{width: calc(100% - 400px);}a[href="/new"] {color: black !important;}a[href="/new"] svg {fill: black !important;}.dropdown-menu{border-radius: 2px !important;}.repository-content {width: 990px;margin-top: 90px;position: absolute;top: initial;left: 50%;transform: translateX(-50%);margin-bottom: 150px}.flash-full{display: none;}.repohead h1 {max-height: 32px;}.State {border-radius: 2px;}#blob-more-options-details{display: none;}.Box-header{padding: 9px 16px;}.Box-row {border-bottom: rgb(200,200,200) 1px solid;}.Box-row:last-of-type {border-bottom: none !important;}.btn-mktg{border-radius: 2px !important;}.day{rx: 0px !important;ry: 0px !important;}.css-truncate.css-truncate-overflow.text-gray{position: absolute;right: 10px;background-color: #f1f8fe !important;}.pl-5.mt-2.flex-order-1.width-full{display: block !important;height: 0px !important;}.pl-5.mt-2.flex-order-1.width-full pre {visibility: hidden !important;.ellipsis-expander.js-details-target{display: none !important;}.hidden-text-expander.d-inline-block {visibility: hidden !important;}`
     if(window.innerWidth <= 1325) {
         css.innerHTML += `aside[aria-label="Explore"]{visibility: hidden;}`
     }
@@ -74,7 +99,7 @@ function normalgithub_run() {
                 lgs.style.borderRadius = "0px"
                 lgs.style.position = "relative"
                 lgs.style.top = "5px"
-                let leftpx = 20
+                let leftpx = 10
                 for(let a of d.getElementsByTagName("a")) {
                     a.style.position = "relative"
                     a.style.top = "-5px"
@@ -83,39 +108,39 @@ function normalgithub_run() {
                 }
                 i.parentNode.style.display = "none"
             }
-            catch(error){css.innerHTML = css.innerHTML.replace("margin-top: 90px;", "")}
+            catch(error){//css.innerHTML += ".repository-content {margin-top: 20px !important;}"
+        }
             break;
         }
     }
     document.getElementsByClassName("footer")[0].style.display = "none"
     try {
-        setTimeout(function() {
-            document.getElementsByClassName("flex-shrink-0 col-12 col-md-3")[0].style.display = "none"
-            document.getElementsByClassName("details-overlay details-reset position-relative")[0].style.display = "none"
-            let desc = document.getElementsByClassName("f4 mt-3")[0].innerHTML
-            let del = document.createElement("p")
-            del.style.position = "absolute"
-            del.style.top = "175px";
-            del.style.left = "50%";
-            del.style.width = "990px"
-            del.innerHTML = desc;
-            document.body.appendChild(del)
-            del.style.transform = "translateX(-50%)";
-            let tpcs = document.getElementsByClassName("list-topics-container")[0].cloneNode(true)
-            tpcs.style.position = "absolute"
-            tpcs.style.top = "200px"
-            tpcs.style.left = "50%"
-            tpcs.style.width = "990px"
-            tpcs.style.height = "28px";
-            tpcs.style.overflowY = "hidden"
-            tpcs.style.transform = "translateX(-50%)"
-            for(let i of tpcs.getElementsByTagName("a")) {
-                i.style.borderRadius = "2px"
-            }
-            document.body.appendChild(tpcs)
-        }, 10)
+        document.getElementsByClassName("flex-shrink-0 col-12 col-md-3")[0].style.display = "none"
+        document.getElementsByClassName("details-overlay details-reset position-relative")[0].style.display = "none"
+        let desc = document.getElementsByClassName("f4 mt-3")[0].innerHTML
+        let del = document.createElement("p")
+        del.style.position = "absolute"
+        del.style.top = "175px";
+        del.style.left = "50%";
+        del.style.width = "990px"
+        del.innerHTML = desc;
+        document.body.appendChild(del)
+        del.style.transform = "translateX(-50%)";
+        let tpcs = document.getElementsByClassName("list-topics-container")[0].cloneNode(true)
+        tpcs.style.position = "absolute"
+        tpcs.style.top = "200px"
+        tpcs.style.left = "50%"
+        tpcs.style.width = "990px"
+        tpcs.style.height = "28px";
+        tpcs.style.overflowY = "hidden"
+        tpcs.style.transform = "translateX(-50%)"
+        for(let i of tpcs.getElementsByTagName("a")) {
+            i.style.borderRadius = "2px"
+        }
+        document.body.appendChild(tpcs)
     }
-    catch(error){}
+    catch(error){//css.innerHTML += ".repository-content {margin-top: 20px !important;}"
+    }
 }
 
 
@@ -124,7 +149,7 @@ let oldurl = window.location.pathname
 let urlchange = setInterval(function() {
     if(window.location.pathname !== oldurl) {
         setTimeout(function() {
-            location.reload();
+            window.location = window.location.pathname;
         }, 10)
     }
     oldurl = window.location.pathname
