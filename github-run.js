@@ -25,7 +25,7 @@ function normalgithub_run() {
                 }
             }
             catch(error) {console.error(error)}
-        }, 500)
+        }, 1000)
     }
     let set1024px = ["container-xl", "js-check-all-container", "flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0", "footer"]
     set1024px.forEach(function(el) {
