@@ -1,14 +1,12 @@
-let leaveCommits = false; // Set to true if the top blue bar wth latest commit doesn't display correctly.
-
 function normalgithub_run() {
     console.log("Thanks for using normal-github extension ♥")
     if(document.getElementById("normalgithub-stats") !== null) {
         document.body.removeChild(document.getElementById("normalgithub-stats"))
     }
-    if(document.getElementsByClassName("css-truncate css-truncate-overflow text-gray").length !== 0) {
-        function tryChange() {
-            document.getElementsByClassName("list-style-none d-flex")
+    setTimeout(function() {
+        if(document.getElementsByClassName("css-truncate css-truncate-overflow text-gray").length !== 0) {
             let a = document.getElementsByClassName("css-truncate css-truncate-overflow text-gray")[0].getElementsByTagName("a")[0]
+            console.log(a)
             let author = a.outerHTML;
             a.innerHTML = a.innerHTML.replace(a.innerHTML, "").replace("committed", "")
             document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML = author + document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML
@@ -18,15 +16,7 @@ function normalgithub_run() {
                 el.style.backgroundColor = "#f1f8fe"
             }
         }
-        setTimeout(function() {
-            try {
-                if(leaveCommits == false) { 
-                    tryChange();
-                }
-            }
-            catch(error) {console.error(error)}
-        }, 1000)
-    }
+    }, 1000)
     let set1024px = ["container-xl", "js-check-all-container", "flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0", "footer"]
     set1024px.forEach(function(el) {
         try {
@@ -114,17 +104,23 @@ function normalgithub_run() {
         }
     }
     document.getElementsByClassName("footer")[0].style.display = "none"
+    
     try {
         document.getElementsByClassName("flex-shrink-0 col-12 col-md-3")[0].style.display = "none"
         document.getElementsByClassName("details-overlay details-reset position-relative")[0].style.display = "none"
         let desc = document.getElementsByClassName("f4 mt-3")[0].innerHTML
         let del = document.createElement("p")
         del.style.position = "absolute"
+        del.id = "description"
         del.style.top = "175px";
         del.style.left = "50%";
         del.style.width = "990px"
         del.innerHTML = desc;
         document.body.appendChild(del)
+        if(document.getElementsByClassName("fork-flag mt-1").length !== 0) {
+            del.style.top = "185px"
+            document.getElementById("normalgithub-stats").style.top = "240px"
+        }
         del.style.transform = "translateX(-50%)";
         let tpcs = document.getElementsByClassName("list-topics-container")[0].cloneNode(true)
         tpcs.style.position = "absolute"
@@ -137,10 +133,14 @@ function normalgithub_run() {
         for(let i of tpcs.getElementsByTagName("a")) {
             i.style.borderRadius = "2px"
         }
+        if(document.getElementsByClassName("fork-flag mt-1").length !== 0) {
+            tpcs.style.top = "210px"
+        }
         document.body.appendChild(tpcs)
     }
     catch(error){//css.innerHTML += ".repository-content {margin-top: 20px !important;}"
     }
+   
 }
 
 
