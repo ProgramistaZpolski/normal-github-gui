@@ -1,0 +1,14 @@
+{
+    "name": "Normal GitHub",
+    "version": "1.0",
+    "description": "yay",
+    "manifest_version": 2,
+    "permissions": ["tabs", "https://github.com/", "contentSettings"],
+    
+    "content_scripts": [
+        {
+          "matches": ["https://github.com/*", "https://www.github.com/*"],
+          "js": ["github-run.js"]
+        }
+    ]
+  }
