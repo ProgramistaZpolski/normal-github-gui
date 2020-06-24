@@ -1,10 +1,12 @@
 # normal-github
 A browser extension fixing GitHub's new layout.
 
+```
 GitHub recently rolled out a layout update which people generally do not like.
 While there may be already some extensions fixing it, here's my take.
 The extension is WIP as of now, but it's stable enough for day-to-day usage.
 For now it's available for Chromium-based browsers only. Firefox version coming soon.
+```
 
 ## Installation
 
