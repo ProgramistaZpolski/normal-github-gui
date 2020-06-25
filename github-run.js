@@ -135,7 +135,7 @@ function normalgithub_run() {
                 for(let mtl of document.getElementsByClassName("muted-link")) {
                     if(mtl.href.includes("#readme") == true || mtl.href.includes("/LICENSE") == true) {
                         if(mtl.innerHTML.includes("License") == true) {
-                            mtl.innerHTML = mtl.innerHTML.split(" ")[0]
+                            mtl.innerHTML = mtl.innerHTML.split("License")[0]
                         }
                         d.getElementsByClassName("list-style-none d-flex")[0].appendChild(mtl)
                     }
