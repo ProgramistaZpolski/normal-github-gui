@@ -6,7 +6,6 @@ function normalgithub_run() {
     setTimeout(function() {
         if(document.getElementsByClassName("css-truncate css-truncate-overflow text-gray").length !== 0) {
             let a = document.getElementsByClassName("css-truncate css-truncate-overflow text-gray")[0].getElementsByTagName("a")[0]
-            console.log(a)
             let author = a.outerHTML;
             a.innerHTML = a.innerHTML.replace(a.innerHTML, "").replace("committed", "")
             document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML = author + document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML
@@ -14,6 +13,46 @@ function normalgithub_run() {
                 el.style.position = "relative"
                 el.style.top = "-29.5px"
                 el.style.backgroundColor = "#f1f8fe"
+            }
+            let de;
+            for(let det of document.getElementsByTagName("details-dialog")) {
+                if(det.getAttribute("aria-label") == "Edit repository details") {
+                    de = det;
+                    det.style.visibility = "hidden"
+                    document.body.appendChild(det)
+                    for(let btn of det.getElementsByTagName("button")) {
+                        if(btn.innerHTML == "Cancel") {
+                            btn.onclick = function() {
+                                det.style.visibility = "hidden"
+                            }
+                        }
+                    }
+                    det.getElementsByTagName("button")[0].onclick = function() {
+                        det.style.visibility = "hidden"
+                    }
+                    break;
+                }
+            }
+            for(let svg of document.getElementsByTagName("svg")) {
+                if(svg.getAttribute("aria-label") == "Edit repository metadata") {
+                    // found an edit button!
+                    let a = svg.parentNode.parentNode.cloneNode(true);
+                    a.onclick = function() {
+                        de.style.visibility = "visible"
+                    }
+                    a.innerHTML = "Edit"
+                    a.style.cursor = "pointer"
+                    a.style.position = "relative"
+                    a.style.top = "5px"
+                    a.style.right = "9px"
+                    a.style.padding = "5px 9px"
+                    a.style.background = "linear-gradient(to bottom, #fafbfc, #f0f3f6)"
+                    a.style.border = "1px #c4c8cc solid"
+                    a.style.borderRadius = "2px"
+                    document.getElementsByClassName("repohead")[0].appendChild(a)
+
+                    break;
+                }
             }
         }
     }, 1000)
@@ -113,8 +152,8 @@ function normalgithub_run() {
         del.style.position = "absolute"
         del.id = "description"
         del.style.top = "175px";
-        del.style.left = "50%";
-        del.style.width = "990px"
+        del.style.left = "calc(50% - 20px)";
+        del.style.width = "950px"
         del.innerHTML = desc;
         document.body.appendChild(del)
         if(document.getElementsByClassName("fork-flag mt-1").length !== 0) {
