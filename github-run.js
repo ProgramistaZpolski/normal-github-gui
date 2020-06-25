@@ -56,8 +56,9 @@ function normalgithub_run() {
                     break;
                 }
             }
+            
         }
-    }, 1000)
+    }, 1250)
     let set1024px = ["container-xl", "js-check-all-container", "flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0", "footer"]
     set1024px.forEach(function(el) {
         try {
@@ -106,6 +107,7 @@ function normalgithub_run() {
         document.getElementsByClassName("flex-order-1 flex-md-order-none mt-2 mt-md-0")[0].style.display = "none"
     }
     catch(error){}
+    
     for(let i of document.getElementsByClassName("sr-only")) {
         if(i.innerHTML == "Git stats") {
             
@@ -120,7 +122,7 @@ function normalgithub_run() {
                 d.innerHTML = i.parentNode.innerHTML;
                 d.style.position = "relative"
                 document.getElementsByClassName("repohead")[0].appendChild(d)
-                d.style.left = "50%"
+                d.style.left = "calc(50% - 9px)"
                 d.style.transform = "translateX(-50%)"
                 d.style.top = "70px"
                 d.style.paddingTop = "15px"
@@ -132,6 +134,9 @@ function normalgithub_run() {
                 lgs.style.position = "relative"
                 for(let mtl of document.getElementsByClassName("muted-link")) {
                     if(mtl.href.includes("#readme") == true || mtl.href.includes("/LICENSE") == true) {
+                        if(mtl.innerHTML.includes("License") == true) {
+                            mtl.innerHTML = mtl.innerHTML.split(" ")[0]
+                        }
                         d.getElementsByClassName("list-style-none d-flex")[0].appendChild(mtl)
                     }
                 }
@@ -178,25 +183,36 @@ function normalgithub_run() {
         del.innerHTML = desc;
         document.getElementsByClassName("repohead")[0].appendChild(del)
         del.style.transform = "translateX(-50%)";
-        let tpcs = document.getElementsByClassName("list-topics-container")[0].cloneNode(true)
-        tpcs.style.position = "absolute"
-        tpcs.style.top = "155px"
-        tpcs.style.left = "50%"
-        tpcs.style.width = "990px"
-        tpcs.style.height = "28px";
-        tpcs.style.overflowY = "hidden"
-        tpcs.style.transform = "translateX(-50%)"
-        for(let i of tpcs.getElementsByTagName("a")) {
-            i.style.borderRadius = "2px"
+        let tpcs;
+        if(document.getElementsByClassName("list-topics-container").length !== 0) {
+            tpcs = document.getElementsByClassName("list-topics-container")[0].cloneNode(true)
+            tpcs.style.position = "absolute"
+            tpcs.id += "normalgithub-topics"
+            tpcs.style.top = "155px"
+            tpcs.style.left = "50%"
+            tpcs.style.width = "990px"
+            tpcs.style.height = "28px";
+            tpcs.style.overflowY = "hidden"
+            tpcs.style.transform = "translateX(-50%)"
+            for(let i of tpcs.getElementsByTagName("a")) {
+                i.style.borderRadius = "2px"
+            }
+            document.getElementsByClassName("repohead")[0].appendChild(tpcs)
         }
-        if(document.getElementsByClassName("fork-flag mt-1").length !== 0) {
-            tpcs.style.top = "210px"
+        
+        
+        
+        if(document.body.innerHTML.includes("forked from") == true || document.body.innerHTML.includes("mirrored from") == true) {
+            // apply patches for forked repositories
+            document.getElementsByClassName("flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0")[0].style.marginTop = "10px"
+            document.getElementsByClassName("repohead")[0].style.maxHeight = "126.25px"
+            del.style.marginTop = "10px"
+            if(document.getElementsByClassName("list-topics-container").length !== 0) tpcs.style.marginTop = "10px"
         }
-        document.getElementsByClassName("repohead")[0].appendChild(tpcs)
     }
-    catch(error){//css.innerHTML += ".repository-content {margin-top: 20px !important;}"
+    catch(error){console.log(error)
     }
-   
+    
 }
 
 
