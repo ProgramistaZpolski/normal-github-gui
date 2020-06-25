@@ -206,10 +206,10 @@ let dbce = false;
 let urlchange = setInterval(function() {
     if(dbce == false) {
         if(window.location.href !== oldurl) {
-            window.location = window.location.pathname
+            location.reload();
             dbce = true
             setTimeout(function() {
-    
+                dbce = false;
             }, 2000)
         }
         oldurl = window.location.href
