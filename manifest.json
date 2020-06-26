@@ -1,7 +1,7 @@
 {
     "name": "Normal GitHub",
-    "version": "1.1",
-    "description": "yay",
+    "version": "1.1.1",
+    "description": "Revert GitHub to its state before a UI redesign.",
     "manifest_version": 2,
     "content_scripts": [
         {
