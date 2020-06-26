@@ -1,13 +1,8 @@
 function normalgithub_run() {
-    console.log("Thanks for using normal-github extension ♥")
-    if(document.getElementById("normalgithub-stats") !== null) {
-        document.body.removeChild(document.getElementById("normalgithub-stats"))
-    }
-    let dv;
     setTimeout(function() {
         if(document.getElementsByClassName("css-truncate css-truncate-overflow text-gray").length !== 0) {
             let a = document.getElementsByClassName("css-truncate css-truncate-overflow text-gray")[0].getElementsByTagName("a")[0];
-
+            
             let author = a.outerHTML;
             a.innerHTML = a.innerHTML.replace(a.innerHTML, "").replace("committed", "")
             document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML = author + document.getElementsByClassName("pl-5 mt-2 flex-order-1 width-full")[0].innerHTML
@@ -100,9 +95,7 @@ function normalgithub_run() {
         rh.style.maxHeight = "114.25px"
         css.innerHTML += ".repohead{padding-left: " + diff / 2 + "px;padding-right: " + diff / 2 + "px;max-height: 113.25px !important;}"
     }
-    catch(error){
-        
-    }
+    catch(error){}
     try {
         document.getElementsByClassName("flex-order-1 flex-md-order-none mt-2 mt-md-0")[0].style.display = "none"
     }
@@ -110,7 +103,6 @@ function normalgithub_run() {
     
     for(let i of document.getElementsByClassName("sr-only")) {
         if(i.innerHTML == "Git stats") {
-            
             try {
                 // it's a repository page
                 // bring back stats on the top
@@ -122,7 +114,8 @@ function normalgithub_run() {
                 d.innerHTML = i.parentNode.innerHTML;
                 d.style.position = "relative"
                 document.getElementsByClassName("repohead")[0].appendChild(d)
-                d.style.left = "calc(50% - 9px)"
+                d.style.left = "50%"
+                d.style.marginLeft = "0px"
                 d.style.transform = "translateX(-50%)"
                 d.style.top = "70px"
                 d.style.paddingTop = "15px"
@@ -155,8 +148,7 @@ function normalgithub_run() {
                 }
                 i.parentNode.style.display = "none"
             }
-            catch(error){//css.innerHTML += ".repository-content {margin-top: 20px !important;}"
-        }
+            catch(error){}
             break;
         }
     }
@@ -209,27 +201,31 @@ function normalgithub_run() {
             del.style.marginTop = "10px"
             if(document.getElementsByClassName("list-topics-container").length !== 0) tpcs.style.marginTop = "10px"
         }
+        
     }
-    catch(error){console.log(error)
-    }
-    
+    catch(error){}
+    // navigation fix(?)
+    setTimeout(function() {
+        try {
+            for(let a of document.getElementsByTagName("a")) {
+                let atts = ["data-selected-links", "data-ga-click", "data-tab-item", "data-hydro-click", "data-hydro-click-hmac"]
+                atts.forEach(function(attr) {
+                    a.removeAttribute(attr)
+                })
+                let classNames = ["js-selected-navigation-item", "js-responsive-underlinenav-item", "hx_underlinenav-item", "no-wrap"]
+                classNames.forEach(function(cls) {
+                    if(a.className !== null && a.className !== "")
+                    a.className = a.className.replace(cls, "")
+                })
+                a.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                }, true);
+            }
+        }
+        catch(error){}
+    }, 500)
+    console.log("Thanks for using normal-github extension ♥")
 }
 
-
-let oldurl = window.location.href
-let dbce = false;
-
-let urlchange = setInterval(function() {
-    if(dbce == false) {
-        if(window.location.href !== oldurl) {
-            location.reload();
-            dbce = true
-            setTimeout(function() {
-                dbce = false;
-            }, 2000)
-        }
-        oldurl = window.location.href
-    }
-}, 100)
 
 normalgithub_run();
