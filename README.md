@@ -16,7 +16,7 @@ For now it's available for Chromium-based browsers. Firefox version coming soon 
 4. If you see a new extension called "Normal GitHub", turn it on, refresh GitHub and you're ready to go!
 
 ## What does it do
-A short answer is already on the there, but here's a more detailed version:
+A short answer is already here, but here's a more detailed version:
 
 - Hides the new sidebar
 - Changes colors of buttons to match old GitHub
