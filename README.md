@@ -1,14 +1,17 @@
 # normal-github
 A browser extension reverting GitHub's new layout.
 
-```
-GitHub rolled out a layout update which people generally do not like.
-While there may be already some extensions fixing some of it, here's my take.
-The extension is work in progress as of now, but it's stable enough for day-to-day usage.
-For now it's available for Chromium-based browsers. Firefox version coming soon (probably when the Chromium version is fully done)
-```
+GitHub rolled out a layout update which people generally do not like.\
+While there may be already some extensions fixing some of it, here's my take.\
+The extension is work in progress as of now, but it's stable enough for day-to-day usage.\
+For now it's available for Chromium-based browsers. Firefox version coming soon\
+(probably when the Chromium version is fully done)
 
 ## Installation
+
+***Chrome extension available [here](https://chrome.google.com/webstore/detail/normal-github/jefgolcapceamjnpkafdbgjkebjmgflp)!***
+
+Or, if you don't want to use the Web Store...
 
 1. Download.
 2. Go to chrome://extensions and click "Load unpacked extensions". A directory select window will pop up.
@@ -23,7 +26,7 @@ A short answer is already here, but here's a more detailed version:
 - Takes most important info from the sidebar and puts it on the top (like in old GitHub UI)
 - Reduces rounded corners
 - Centers the repository header
-- Replace some aspects of new GitHub with old ones
+- Replace some smaller aspects of new GitHub with old ones
 
 You can see everything on screenshots below.
 
