@@ -120,15 +120,17 @@ function normalgithub_run() {
                 d.style.top = "70px"
                 d.style.paddingTop = "15px"
                 d.style.paddingBottom = "5px"
-                
                 d.appendChild(lgs)
                 lgs.style.width = "989px"
                 lgs.style.borderRadius = "0px"
                 lgs.style.position = "relative"
                 for(let mtl of document.getElementsByClassName("muted-link")) {
                     if(mtl.href.includes("#readme") == true || mtl.href.includes("/LICENSE") == true) {
-                        if(mtl.innerHTML.includes("License") == true) {
-                            mtl.innerHTML = mtl.innerHTML.split("License")[0]
+                        if(mtl.innerHTML.toLowerCase().includes("license") == true) {
+                            let toRemove = ["License", "-Clause", " license"]
+                            toRemove.forEach(function(tr) {
+                                mtl.innerHTML = mtl.innerHTML.split(tr)[0]
+                            })
                         }
                         d.getElementsByClassName("list-style-none d-flex")[0].appendChild(mtl)
                     }
@@ -140,6 +142,7 @@ function normalgithub_run() {
                 if(a_els.length == 3) addNumber = 320
                 lgs.style.top = "5px"
                 let leftpx = 10
+                if(parseInt(d.getElementsByTagName("strong")[0].innerHTML.split(",").join("")) > 1000) leftpx = 0
                 for(let a of d.getElementsByTagName("a")) {
                     a.style.position = "relative"
                     a.style.top = "-5px"
